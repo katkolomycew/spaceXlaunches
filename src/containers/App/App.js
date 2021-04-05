@@ -1,11 +1,9 @@
-import RoundButton from "../../components/Buttons/RoundButton/RoundButton";
 import "./App.scss";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <RoundButton title="Reload Data" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>

@@ -1,4 +1,4 @@
-@import "../../../assets/stylesheet.scss";
+@import "../../assets/stylesheet.scss";
 
 .round-button {
   background-color: $primary-blue;
@@ -11,9 +11,18 @@
   border-bottom-left-radius: 25px;
 }
 
-.round-button:active,
-.round-button:hover,
-.round-button:focus {
+.square-button {
+  background-color: $primary-blue;
+  color: #fff;
+  font-family: inherit;
+  font-size: 1rem;
+  border: none;
+  padding: 0.75rem 1rem;
+}
+
+.button:active,
+.button:hover,
+.button:focus {
   background-color: $secondary-blue;
   transform: scale(1.05);
   cursor: pointer;
