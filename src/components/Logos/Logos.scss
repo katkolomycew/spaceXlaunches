@@ -1,0 +1,19 @@
+@import "../../assets//stylesheet.scss";
+
+.text-logo_wrapper {
+  display: inline-block;
+  position: fixed;
+  top: 1.5rem;
+  left: 1.5rem;
+}
+
+.text-logo {
+  width: 250px;
+  height: auto;
+}
+
+.text-logo_title {
+  font-size: 1.25rem;
+  margin-left: -2rem;
+  color: $font-color;
+}
