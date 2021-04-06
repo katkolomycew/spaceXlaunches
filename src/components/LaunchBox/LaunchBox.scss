@@ -9,10 +9,10 @@
 }
 
 .launch-box_wrapper-left {
-  width: 40%;
+  width: 50%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  // justify-content: space-between;
   align-items: flex-start;
   margin-left: 0.5rem;
 }
@@ -21,6 +21,10 @@
 .launch-box_title {
   font-weight: 600;
   transform: scale(1.5);
+}
+
+.launch-box_number {
+  margin-right: 5rem;
 }
 
 .launch-box_wrapper-right {
