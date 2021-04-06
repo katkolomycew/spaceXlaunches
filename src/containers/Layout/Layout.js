@@ -17,7 +17,7 @@ import "./Layout.scss";
 class Layout extends Component {
   state = {
     launchData: [],
-    sortedLaunchDate: false,
+    sortedLaunchData: false,
   };
 
   componentDidMount() {
@@ -35,7 +35,11 @@ class Layout extends Component {
   };
 
   sortDataHandler = () => {
-    console.log(this.state.launchData);
+    const sorted = [...this.state.launchData].reverse();
+    this.setState({
+      launchData: sorted,
+      sortedLaunchData: !this.state.sortedLaunchData,
+    });
   };
 
   render() {
@@ -52,7 +56,9 @@ class Layout extends Component {
         <div className="buttons">
           <SquareButton title="Filter by Year" icon={SquareButtonFilterIcon} />
           <SquareButton
-            title="Sort Descending"
+            title={
+              this.state.sortedLaunchData ? "Sort Ascending" : "Sort Descending"
+            }
             icon={SquareButtonSortIcon}
             clicked={this.sortDataHandler}
           />
