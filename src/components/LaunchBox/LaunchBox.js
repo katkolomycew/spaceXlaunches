@@ -7,7 +7,7 @@ const launchBox = (props) => {
       <Card>
         <Card.Body>
           <div className="launch-box_wrapper-left">
-            <Card.Text className="launch-box_number">{props.number}</Card.Text>
+            <Card.Text className="launch-box_number">#{props.number}</Card.Text>
             <Card.Text className="launch-box_title">{props.title}</Card.Text>
           </div>
           <div className="launch-box_wrapper-right">

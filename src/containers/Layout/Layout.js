@@ -15,6 +15,20 @@ import WithErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 import "./Layout.scss";
 
 class Layout extends Component {
+  state = {
+    launchData: [],
+  };
+
+  componentDidMount() {
+    axios
+      .get("https://api.spacexdata.com/v3/launches")
+      .then((response) => {
+        const data = response.data;
+        this.setState({ launchData: data });
+      })
+      .catch((error) => console.log(error));
+  }
+
   render() {
     return (
       <Aux>
@@ -30,7 +44,16 @@ class Layout extends Component {
           <ImgLogo img={ImgLogoSrc} />
         </div>
         <div className="right">
-          <LaunchBox />
+          {this.state.launchData.map((d) => {
+            return (
+              <LaunchBox
+                number={d.flight_number}
+                title={d.mission_name}
+                date={new Date(d.launch_date_utc).toLocaleDateString()}
+                launch={d.rocket.rocket_name}
+              />
+            );
+          })}
         </div>
       </Aux>
     );
