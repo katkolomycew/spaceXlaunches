@@ -1,10 +1,4 @@
-@import "../../assets//stylesheet.scss";
-
-.text-logo_wrapper {
-  position: fixed;
-  top: 1.5rem;
-  left: 1.5rem;
-}
+@import "../../assets/stylesheet.scss";
 
 .text-logo {
   width: 250px;
@@ -12,15 +6,11 @@
 }
 
 .text-logo_title {
+  position: relative;
+  top: 0.5rem;
   font-size: 1.25rem;
   margin-left: -2rem;
   color: $font-color;
-}
-
-.img-logo_wrapper {
-  position: fixed;
-  top: 7.5rem;
-  left: 1.5rem;
 }
 
 .img-logo {
