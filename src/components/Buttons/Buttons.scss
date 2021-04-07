@@ -11,21 +11,42 @@
   border-bottom-left-radius: 25px;
 }
 
-.square-button {
+.square-button,
+#dropdown-basic {
   background-color: $primary-blue;
   color: #fff;
-  font-family: inherit;
   font-size: 1rem;
   border: none;
   padding: 0.75rem 1rem;
   margin-right: 1rem;
+  border-radius: 0;
+}
+
+#dropdown-basic::after {
+  content: url("../../assets/icon/select.png");
+  color: transparent;
+  border: none;
+  vertical-align: unset;
+}
+
+.dropdown-menu {
+  text-align: center;
+  min-width: 8.25rem;
 }
 
 .button:active,
-.button:hover {
+.button:hover,
+#dropdown-basic:active,
+#dropdown-basic:hover {
   background-color: $secondary-blue;
   transform: scale(1.05);
   cursor: pointer;
+}
+
+.dropdown-item:active,
+.dropdown-item:hover {
+  background-color: $primary-blue;
+  color: #fff;
 }
 
 .button-icon {

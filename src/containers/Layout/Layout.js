@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import axios from "../../axios-orders";
 import Aux from "../../hoc/Aux/Aux";
-import DropdownButton from "../../components/Buttons/DropdownButton/DropdownButton";
+// import DropdownButton from "../../components/Buttons/DropdownButton/DropdownButton";
+import Dropdown from "react-bootstrap/Dropdown";
 import ImgLogo from "../../components/Logos/ImgLogo/ImgLogo";
 import ImgLogoSrc from "../../assets/img/launch-home.png";
 import LaunchBox from "../../components/LaunchBox/LaunchBox";
 import RoundButton from "../../components/Buttons/RoundButton/RoundButton";
 import RoundButtonIcon from "../../assets/icon/refresh.png";
 import SquareButton from "../../components/Buttons/SquareButton/SquareButton";
-import SquareButtonFilterIcon from "../../assets/icon/select.png";
+// import SquareButtonFilterIcon from "../../assets/icon/select.png";
 import SquareButtonSortIcon from "../../assets/icon/sort.png";
 import TextLogo from "../../components/Logos/TextLogo/TextLogo";
 import TextLogoSrc from "../../assets/spacex-logo.png";
@@ -20,6 +21,7 @@ class Layout extends Component {
     launchData: [],
     filteredData: [],
     sortedLaunchData: false,
+    uniqueData: [],
   };
 
   componentDidMount() {
@@ -31,7 +33,11 @@ class Layout extends Component {
       .get("https://api.spacexdata.com/v3/launches")
       .then((response) => {
         const data = response.data;
-        this.setState({ launchData: data, filteredData: data });
+        this.setState({
+          launchData: data,
+          filteredData: data,
+          uniqueData: [...data].map((d) => d.launch_year),
+        });
       })
       .catch((error) => console.log(error));
   };
@@ -46,7 +52,6 @@ class Layout extends Component {
 
   filterDataHandler = (e) => {
     let filtered = this.state.launchData;
-
     filtered = filtered.filter((d) => {
       return d.launch_year === e.target.innerHTML;
     });
@@ -55,6 +60,9 @@ class Layout extends Component {
   };
 
   render() {
+    const unique = [...this.state.uniqueData];
+    const removed = unique.filter((val, id, arr) => arr.indexOf(val) === id);
+
     return (
       <Aux>
         <div className="top">
@@ -66,7 +74,18 @@ class Layout extends Component {
           />
         </div>
         <div className="buttons">
-          <DropdownButton clicked={(e) => this.filterDataHandler(e)} />
+          <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+              Filter By Year
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu onClick={(e) => this.filterDataHandler(e)}>
+              {removed.map((d, i) => {
+                return <Dropdown.Item key={i}>{d}</Dropdown.Item>;
+              })}
+            </Dropdown.Menu>
+          </Dropdown>
+
           <SquareButton
             title={
               this.state.sortedLaunchData ? "Sort Ascending" : "Sort Descending"
