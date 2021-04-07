@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "../../axios-orders";
 import Aux from "../../hoc/Aux/Aux";
+import DropdownButton from "../../components/Buttons/DropdownButton/DropdownButton";
 import ImgLogo from "../../components/Logos/ImgLogo/ImgLogo";
 import ImgLogoSrc from "../../assets/img/launch-home.png";
 import LaunchBox from "../../components/LaunchBox/LaunchBox";
@@ -17,6 +18,7 @@ import "./Layout.scss";
 class Layout extends Component {
   state = {
     launchData: [],
+    filteredData: [],
     sortedLaunchData: false,
   };
 
@@ -29,17 +31,27 @@ class Layout extends Component {
       .get("https://api.spacexdata.com/v3/launches")
       .then((response) => {
         const data = response.data;
-        this.setState({ launchData: data });
+        this.setState({ launchData: data, filteredData: data });
       })
       .catch((error) => console.log(error));
   };
 
   sortDataHandler = () => {
-    const sorted = [...this.state.launchData].reverse();
+    const sorted = [...this.state.filteredData].reverse();
     this.setState({
-      launchData: sorted,
+      filteredData: sorted,
       sortedLaunchData: !this.state.sortedLaunchData,
     });
+  };
+
+  filterDataHandler = (e) => {
+    let filtered = this.state.launchData;
+
+    filtered = filtered.filter((d) => {
+      return d.launch_year === e.target.innerHTML;
+    });
+
+    this.setState({ filteredData: filtered });
   };
 
   render() {
@@ -54,7 +66,7 @@ class Layout extends Component {
           />
         </div>
         <div className="buttons">
-          <SquareButton title="Filter by Year" icon={SquareButtonFilterIcon} />
+          <DropdownButton clicked={(e) => this.filterDataHandler(e)} />
           <SquareButton
             title={
               this.state.sortedLaunchData ? "Sort Ascending" : "Sort Descending"
@@ -67,7 +79,7 @@ class Layout extends Component {
           <ImgLogo img={ImgLogoSrc} />
         </div>
         <div className="right">
-          {this.state.launchData.map((d, i) => {
+          {this.state.filteredData.map((d, i) => {
             return (
               <LaunchBox
                 key={i}
