@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import "../Logos.scss";
 
 const textLogo = (props) => {
@@ -7,6 +8,10 @@ const textLogo = (props) => {
       <span className="text-logo_title">LAUNCHES</span>
     </div>
   );
+};
+
+textLogo.propTypes = {
+  img: PropTypes.string.isRequired,
 };
 
 export default textLogo;

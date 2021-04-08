@@ -24,7 +24,7 @@ const launchBox = (props) => {
 launchBox.propTypes = {
   number: PropTypes.number,
   title: PropTypes.string,
-  date: PropTypes.number,
+  date: PropTypes.string,
   rocket: PropTypes.string,
 };
 

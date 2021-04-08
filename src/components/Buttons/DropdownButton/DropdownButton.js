@@ -16,9 +16,9 @@ const dropdownButton = (props) => {
 };
 
 dropdownButton.propTypes = {
-  title: PropTypes.string,
-  clicked: PropTypes.func,
-  data: PropTypes.array,
+  title: PropTypes.string.isRequired,
+  clicked: PropTypes.func.isRequired,
+  data: PropTypes.array.isRequired,
 };
 
 export default dropdownButton;
