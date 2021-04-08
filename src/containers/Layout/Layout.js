@@ -6,9 +6,10 @@ import DropdownButton from "../../components/Buttons/DropdownButton/DropdownButt
 import ImgLogo from "../../components/Logos/ImgLogo/ImgLogo";
 import ImgLogoSrc from "../../assets/img/launch-home.png";
 import LaunchBox from "../../components/LaunchBox/LaunchBox";
-import Modal from "../../components/Modal/Modal";
+import ErrorModal from "../../components/ErrorModal/ErrorModal";
 import RoundButton from "../../components/Buttons/RoundButton/RoundButton";
 import RoundButtonIcon from "../../assets/icon/refresh.png";
+import Spinner from "../../components/Spinner/Spinner";
 import SquareButton from "../../components/Buttons/SquareButton/SquareButton";
 import SquareButtonSortIcon from "../../assets/icon/sort.png";
 import TextLogo from "../../components/Logos/TextLogo/TextLogo";
@@ -24,6 +25,7 @@ class Layout extends Component {
     launchYearsData: [],
     error: null,
     errorMessage: "",
+    loading: true,
   };
 
   componentDidMount() {
@@ -32,7 +34,7 @@ class Layout extends Component {
 
   fetchLaunchData = () => {
     axios
-      .get("https://api.spacexsdata.com/v3/launches")
+      .get("https://api.spacexdata.com/v3/launches")
       .then((response) => {
         const data = response.data;
         this.setState({
@@ -40,6 +42,7 @@ class Layout extends Component {
           filteredLaunchData: data,
           sortedLaunchData: false,
           launchYearsData: [...data].map((item) => item.launch_year),
+          loading: false,
         });
       })
       .catch((error) =>
@@ -117,7 +120,9 @@ class Layout extends Component {
         </div>
         <div className="right-wrapper">
           {this.state.error ? (
-            <Modal error={this.state.errorMessage} />
+            <ErrorModal error={this.state.errorMessage} />
+          ) : this.state.loading ? (
+            <Spinner />
           ) : (
             renderedLaunchData
           )}
