@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Dropdown from "react-bootstrap/Dropdown";
 import "../Buttons.scss";
 
@@ -12,6 +13,12 @@ const dropdownButton = (props) => {
       </Dropdown.Menu>
     </Dropdown>
   );
+};
+
+dropdownButton.propTypes = {
+  title: PropTypes.string,
+  clicked: PropTypes.func,
+  data: PropTypes.array,
 };
 
 export default dropdownButton;

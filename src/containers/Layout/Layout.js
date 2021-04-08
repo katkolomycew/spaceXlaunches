@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import moment from "moment";
 import axios from "../../axios-orders";
+import moment from "moment";
 import Aux from "../../hoc/Aux/Aux";
 import DropdownButton from "../../components/Buttons/DropdownButton/DropdownButton";
 import ImgLogo from "../../components/Logos/ImgLogo/ImgLogo";
@@ -71,7 +71,7 @@ class Layout extends Component {
 
     return (
       <Aux>
-        <div className="top">
+        <div className="nav-wrapper">
           <TextLogo img={TextLogoSrc} />
           <RoundButton
             title="Reload Data"
@@ -79,7 +79,7 @@ class Layout extends Component {
             clicked={this.reloadLaunchData}
           />
         </div>
-        <div className="buttons">
+        <div className="subnav-wrapper">
           <DropdownButton
             title="Filter By Year"
             clicked={(event) => this.filterDataHandler(event)}
@@ -93,10 +93,10 @@ class Layout extends Component {
             clicked={this.sortDataHandler}
           />
         </div>
-        <div className="left">
+        <div className="left-wrapper">
           <ImgLogo img={ImgLogoSrc} />
         </div>
-        <div className="right">
+        <div className="right-wrapper">
           {this.state.filteredLaunchData.map((item, index) => {
             return (
               <LaunchBox
@@ -104,7 +104,7 @@ class Layout extends Component {
                 number={item.flight_number}
                 title={item.mission_name}
                 date={moment(item.launch_date_utc).format("Do MMM YYYY")}
-                launch={item.rocket.rocket_name}
+                rocket={item.rocket.rocket_name}
               />
             );
           })}

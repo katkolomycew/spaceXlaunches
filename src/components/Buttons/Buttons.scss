@@ -1,18 +1,7 @@
 @import "../../assets/stylesheet.scss";
 
-.round-button {
-  background-color: $primary-blue;
-  color: #fff;
-  font-family: inherit;
-  font-size: 1rem;
-  border: none;
-  padding: 0.75rem 1rem;
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
-}
-
-.square-button,
-#dropdown-basic {
+#dropdown-basic,
+.square-button {
   background-color: $primary-blue;
   color: #fff;
   font-size: 1rem;
@@ -34,10 +23,21 @@
   min-width: 8.5rem;
 }
 
-.button:active,
-.button:hover,
+.round-button {
+  background-color: $primary-blue;
+  color: #fff;
+  font-family: inherit;
+  font-size: 1rem;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+
 #dropdown-basic:active,
-#dropdown-basic:hover {
+#dropdown-basic:hover,
+.button:active,
+.button:hover {
   background-color: $secondary-blue;
   transform: scale(1.05);
   cursor: pointer;
