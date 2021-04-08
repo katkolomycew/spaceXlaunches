@@ -86,6 +86,7 @@ class Layout extends Component {
             title={item.mission_name}
             date={moment(item.launch_date_utc).format("Do MMM YYYY")}
             rocket={item.rocket.rocket_name}
+            tabIndex="0"
           />
         );
       }
@@ -93,40 +94,50 @@ class Layout extends Component {
 
     return (
       <Aux>
-        <div className="nav-wrapper">
-          <TextLogo img={TextLogoSrc} />
-          <RoundButton
-            title="Reload Data"
-            icon={RoundButtonIcon}
-            clicked={this.reloadLaunchData}
-          />
-        </div>
-        <div className="subnav-wrapper">
-          <DropdownButton
-            title="Filter By Year"
-            clicked={(event) => this.filterDataHandler(event)}
-            data={filteredLaunchYears}
-          />
-          <SquareButton
-            title={
-              this.state.sortedLaunchData ? "Sort Ascending" : "Sort Descending"
-            }
-            icon={SquareButtonSortIcon}
-            clicked={this.sortDataHandler}
-          />
-        </div>
-        <div className="left-wrapper">
-          <ImgLogo img={ImgLogoSrc} />
-        </div>
-        <div className="right-wrapper">
-          {this.state.error ? (
-            <ErrorModal error={this.state.errorMessage} />
-          ) : this.state.loading ? (
-            <Spinner />
-          ) : (
-            renderedLaunchData
-          )}
-        </div>
+        <header>
+          <div className="nav-wrapper" tabIndex="0">
+            <TextLogo img={TextLogoSrc} tabIndex="0" />
+            <RoundButton
+              title="Reload Data"
+              icon={RoundButtonIcon}
+              clicked={this.reloadLaunchData}
+              tabIndex="0"
+            />
+          </div>
+          <div className="subnav-wrapper" tabIndex="0">
+            <DropdownButton
+              title="Filter By Year"
+              clicked={(event) => this.filterDataHandler(event)}
+              data={filteredLaunchYears}
+              tabIndex="0"
+            />
+            <SquareButton
+              title={
+                this.state.sortedLaunchData
+                  ? "Sort Ascending"
+                  : "Sort Descending"
+              }
+              icon={SquareButtonSortIcon}
+              clicked={this.sortDataHandler}
+              tabIndex="0"
+            />
+          </div>
+        </header>
+
+        <main>
+          <div className="left-wrapper" tabIndex="0">
+            <ImgLogo img={ImgLogoSrc} tabIndex="0" />
+          </div>
+          <div className="right-wrapper" tabIndex="0">
+            {this.state.error ? (
+              <ErrorModal error={this.state.errorMessage} />
+            ) : this.state.loading ? (
+              <Spinner />
+            ) : (
+              renderedLaunchData
+            )}
+          </div>
+        </main>
       </Aux>
     );
   }
