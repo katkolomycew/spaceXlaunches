@@ -6,6 +6,7 @@ import DropdownButton from "../../components/Buttons/DropdownButton/DropdownButt
 import ImgLogo from "../../components/Logos/ImgLogo/ImgLogo";
 import ImgLogoSrc from "../../assets/img/launch-home.png";
 import LaunchBox from "../../components/LaunchBox/LaunchBox";
+import Modal from "../../components/Modal/Modal";
 import RoundButton from "../../components/Buttons/RoundButton/RoundButton";
 import RoundButtonIcon from "../../assets/icon/refresh.png";
 import SquareButton from "../../components/Buttons/SquareButton/SquareButton";
@@ -21,6 +22,8 @@ class Layout extends Component {
     filteredLaunchData: [],
     sortedLaunchData: false,
     launchYearsData: [],
+    error: null,
+    errorMessage: "",
   };
 
   componentDidMount() {
@@ -29,7 +32,7 @@ class Layout extends Component {
 
   fetchLaunchData = () => {
     axios
-      .get("https://api.spacexdata.com/v3/launches")
+      .get("https://api.spacexsdata.com/v3/launches")
       .then((response) => {
         const data = response.data;
         this.setState({
@@ -39,7 +42,9 @@ class Layout extends Component {
           launchYearsData: [...data].map((item) => item.launch_year),
         });
       })
-      .catch((error) => console.log(error));
+      .catch((error) =>
+        this.setState({ error: error, errorMessage: error.message })
+      );
   };
 
   reloadLaunchData = () => {
@@ -67,6 +72,20 @@ class Layout extends Component {
     const iterated = [...this.state.launchYearsData];
     const filteredLaunchYears = iterated.filter(
       (value, id, filteredArray) => filteredArray.indexOf(value) === id
+    );
+
+    const renderedLaunchData = this.state.filteredLaunchData.map(
+      (item, index) => {
+        return (
+          <LaunchBox
+            key={index}
+            number={item.flight_number}
+            title={item.mission_name}
+            date={moment(item.launch_date_utc).format("Do MMM YYYY")}
+            rocket={item.rocket.rocket_name}
+          />
+        );
+      }
     );
 
     return (
@@ -97,17 +116,11 @@ class Layout extends Component {
           <ImgLogo img={ImgLogoSrc} />
         </div>
         <div className="right-wrapper">
-          {this.state.filteredLaunchData.map((item, index) => {
-            return (
-              <LaunchBox
-                key={index}
-                number={item.flight_number}
-                title={item.mission_name}
-                date={moment(item.launch_date_utc).format("Do MMM YYYY")}
-                rocket={item.rocket.rocket_name}
-              />
-            );
-          })}
+          {this.state.error ? (
+            <Modal error={this.state.errorMessage} />
+          ) : (
+            renderedLaunchData
+          )}
         </div>
       </Aux>
     );
