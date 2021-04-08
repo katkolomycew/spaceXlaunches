@@ -28,6 +28,7 @@ class Layout extends Component {
     loading: true,
   };
 
+
   componentDidMount() {
     this.fetchLaunchData();
   }
@@ -71,25 +72,27 @@ class Layout extends Component {
     this.setState({ filteredLaunchData: filtered });
   };
 
+
   render() {
+    // Filtering duplicate years from original launchYearsData.
     const iterated = [...this.state.launchYearsData];
     const filteredLaunchYears = iterated.filter(
       (value, id, filteredArray) => filteredArray.indexOf(value) === id
     );
 
-    const renderedLaunchData = this.state.filteredLaunchData.map(
-      (item, index) => {
-        return (
-          <LaunchBox
-            key={index}
-            number={item.flight_number}
-            title={item.mission_name}
-            date={moment(item.launch_date_utc).format("Do MMM YYYY")}
-            rocket={item.rocket.rocket_name}
-            tabIndex="0"
-          />
-        );
-      }
+    // Component to be rendered when data is not loading or
+    // has failed to fetch successfully.
+    const renderedLaunchData = this.state.filteredLaunchData.map((item, index) => {
+      return (
+        <LaunchBox
+          key={index}
+          number={item.flight_number}
+          title={item.mission_name}
+          date={moment(item.launch_date_utc).format("Do MMM YYYY")}
+          rocket={item.rocket.rocket_name}
+          tabIndex="0"
+        />
+      )}
     );
 
     return (
@@ -112,11 +115,7 @@ class Layout extends Component {
               tabIndex="0"
             />
             <SquareButton
-              title={
-                this.state.sortedLaunchData
-                  ? "Sort Ascending"
-                  : "Sort Descending"
-              }
+              title={this.state.sortedLaunchData ? "Sort Ascending" : "Sort Descending"}
               icon={SquareButtonSortIcon}
               clicked={this.sortDataHandler}
               tabIndex="0"
@@ -129,13 +128,11 @@ class Layout extends Component {
             <ImgLogo img={ImgLogoSrc} tabIndex="0" />
           </div>
           <div className="right-wrapper" tabIndex="0">
-            {this.state.error ? (
-              <ErrorModal error={this.state.errorMessage} />
-            ) : this.state.loading ? (
-              <Spinner />
-            ) : (
-              renderedLaunchData
-            )}
+            {this.state.error
+              ? <ErrorModal error={this.state.errorMessage} />
+              : this.state.loading
+              ? <Spinner />
+              : renderedLaunchData}
           </div>
         </main>
       </Aux>
