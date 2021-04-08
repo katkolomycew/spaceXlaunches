@@ -1,0 +1,19 @@
+@import "../../assets/stylesheet.scss";
+
+.text-logo {
+  width: 250px;
+  height: auto;
+}
+
+.text-logo_title {
+  position: relative;
+  top: 0.5rem;
+  font-size: 1.25rem;
+  margin-left: -2rem;
+  color: $font-color;
+}
+
+.img-logo {
+  height: 450px;
+  width: auto;
+}

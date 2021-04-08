@@ -1,0 +1,66 @@
+@import "../../assets/stylesheet.scss";
+
+.nav-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  padding-left: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+
+.subnav-wrapper {
+  position: absolute;
+  top: 10vh;
+  left: 35%;
+  height: 10vh;
+  width: 65%;
+  z-index: 5;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.left-wrapper {
+  position: absolute;
+  top: 10vh;
+  left: 0;
+  height: 90vh;
+  width: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.right-wrapper {
+  position: absolute;
+  top: 20vh;
+  right: 0;
+  height: 75vh;
+  width: 65%;
+  padding: 1rem 2rem;
+  margin-top: 1rem;
+  margin-right: 2rem;
+  overflow-y: scroll;
+}
+
+.right-wrapper::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.right-wrapper::-webkit-scrollbar {
+  background-color: #fff;
+  width: 0.5rem;
+}
+
+.right-wrapper::-webkit-scrollbar-thumb {
+  background-color: $font-color;
+  border-radius: 10px;
+}
