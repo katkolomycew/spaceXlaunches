@@ -1,16 +1,14 @@
 import Dropdown from "react-bootstrap/Dropdown";
-import icon from "../../../assets/icon/sort.png";
 import "../Buttons.scss";
 
 const dropdownButton = (props) => {
-  console.log(props.launchYears);
   return (
     <Dropdown>
-      <Dropdown.Toggle id="dropdown-basic">
-        Filter By Year <img src={icon} alt="sort-icon" />
-      </Dropdown.Toggle>
-      <Dropdown.Menu align="right" onClick={props.clicked}>
-        <Dropdown.Item>{props.data}</Dropdown.Item>;
+      <Dropdown.Toggle id="dropdown-basic">{props.title}</Dropdown.Toggle>
+      <Dropdown.Menu onClick={props.clicked}>
+        {props.data.map((item, index) => {
+          return <Dropdown.Item key={index}>{item}</Dropdown.Item>;
+        })}
       </Dropdown.Menu>
     </Dropdown>
   );

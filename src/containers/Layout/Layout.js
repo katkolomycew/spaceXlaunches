@@ -1,15 +1,14 @@
 import React, { Component } from "react";
+import moment from "moment";
 import axios from "../../axios-orders";
 import Aux from "../../hoc/Aux/Aux";
-// import DropdownButton from "../../components/Buttons/DropdownButton/DropdownButton";
-import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "../../components/Buttons/DropdownButton/DropdownButton";
 import ImgLogo from "../../components/Logos/ImgLogo/ImgLogo";
 import ImgLogoSrc from "../../assets/img/launch-home.png";
 import LaunchBox from "../../components/LaunchBox/LaunchBox";
 import RoundButton from "../../components/Buttons/RoundButton/RoundButton";
 import RoundButtonIcon from "../../assets/icon/refresh.png";
 import SquareButton from "../../components/Buttons/SquareButton/SquareButton";
-// import SquareButtonFilterIcon from "../../assets/icon/select.png";
 import SquareButtonSortIcon from "../../assets/icon/sort.png";
 import TextLogo from "../../components/Logos/TextLogo/TextLogo";
 import TextLogoSrc from "../../assets/spacex-logo.png";
@@ -19,9 +18,9 @@ import "./Layout.scss";
 class Layout extends Component {
   state = {
     launchData: [],
-    filteredData: [],
+    filteredLaunchData: [],
     sortedLaunchData: false,
-    uniqueData: [],
+    launchYearsData: [],
   };
 
   componentDidMount() {
@@ -35,33 +34,40 @@ class Layout extends Component {
         const data = response.data;
         this.setState({
           launchData: data,
-          filteredData: data,
-          uniqueData: [...data].map((d) => d.launch_year),
+          filteredLaunchData: data,
+          sortedLaunchData: false,
+          launchYearsData: [...data].map((item) => item.launch_year),
         });
       })
       .catch((error) => console.log(error));
   };
 
+  reloadLaunchData = () => {
+    this.fetchLaunchData();
+  };
+
   sortDataHandler = () => {
-    const sorted = [...this.state.filteredData].reverse();
+    const reversed = [...this.state.filteredLaunchData].reverse();
     this.setState({
-      filteredData: sorted,
+      filteredLaunchData: reversed,
       sortedLaunchData: !this.state.sortedLaunchData,
     });
   };
 
-  filterDataHandler = (e) => {
-    let filtered = this.state.launchData;
-    filtered = filtered.filter((d) => {
-      return d.launch_year === e.target.innerHTML;
+  filterDataHandler = (event) => {
+    let filtered = [...this.state.launchData];
+    filtered = filtered.filter((item) => {
+      return item.launch_year === event.target.innerHTML;
     });
 
-    this.setState({ filteredData: filtered });
+    this.setState({ filteredLaunchData: filtered });
   };
 
   render() {
-    const unique = [...this.state.uniqueData];
-    const removed = unique.filter((val, id, arr) => arr.indexOf(val) === id);
+    const iterated = [...this.state.launchYearsData];
+    const filteredLaunchYears = iterated.filter(
+      (value, id, filteredArray) => filteredArray.indexOf(value) === id
+    );
 
     return (
       <Aux>
@@ -70,22 +76,15 @@ class Layout extends Component {
           <RoundButton
             title="Reload Data"
             icon={RoundButtonIcon}
-            clicked={this.fetchLaunchData}
+            clicked={this.reloadLaunchData}
           />
         </div>
         <div className="buttons">
-          <Dropdown>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
-              Filter By Year
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu onClick={(e) => this.filterDataHandler(e)}>
-              {removed.map((d, i) => {
-                return <Dropdown.Item key={i}>{d}</Dropdown.Item>;
-              })}
-            </Dropdown.Menu>
-          </Dropdown>
-
+          <DropdownButton
+            title="Filter By Year"
+            clicked={(event) => this.filterDataHandler(event)}
+            data={filteredLaunchYears}
+          />
           <SquareButton
             title={
               this.state.sortedLaunchData ? "Sort Ascending" : "Sort Descending"
@@ -98,14 +97,14 @@ class Layout extends Component {
           <ImgLogo img={ImgLogoSrc} />
         </div>
         <div className="right">
-          {this.state.filteredData.map((d, i) => {
+          {this.state.filteredLaunchData.map((item, index) => {
             return (
               <LaunchBox
-                key={i}
-                number={d.flight_number}
-                title={d.mission_name}
-                date={new Date(d.launch_date_utc).toLocaleDateString()}
-                launch={d.rocket.rocket_name}
+                key={index}
+                number={item.flight_number}
+                title={item.mission_name}
+                date={moment(item.launch_date_utc).format("Do MMM YYYY")}
+                launch={item.rocket.rocket_name}
               />
             );
           })}
