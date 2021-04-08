@@ -1,23 +1,28 @@
 {
   "files": {
-    "main.css": "/spacex-launches/static/css/main.9d5b29c0.chunk.css",
-    "main.js": "/spacex-launches/static/js/main.b7a7c18e.chunk.js",
-    "main.js.map": "/spacex-launches/static/js/main.b7a7c18e.chunk.js.map",
-    "runtime-main.js": "/spacex-launches/static/js/runtime-main.2ce542f3.js",
-    "runtime-main.js.map": "/spacex-launches/static/js/runtime-main.2ce542f3.js.map",
-    "static/js/2.35c8a77c.chunk.js": "/spacex-launches/static/js/2.35c8a77c.chunk.js",
-    "static/js/2.35c8a77c.chunk.js.map": "/spacex-launches/static/js/2.35c8a77c.chunk.js.map",
-    "static/js/3.ed531825.chunk.js": "/spacex-launches/static/js/3.ed531825.chunk.js",
-    "static/js/3.ed531825.chunk.js.map": "/spacex-launches/static/js/3.ed531825.chunk.js.map",
+    "main.css": "/spacex-launches/static/css/main.eb5b320e.chunk.css",
+    "main.js": "/spacex-launches/static/js/main.c6f016a3.chunk.js",
+    "main.js.map": "/spacex-launches/static/js/main.c6f016a3.chunk.js.map",
+    "runtime-main.js": "/spacex-launches/static/js/runtime-main.8351c649.js",
+    "runtime-main.js.map": "/spacex-launches/static/js/runtime-main.8351c649.js.map",
+    "static/css/2.7152c0e5.chunk.css": "/spacex-launches/static/css/2.7152c0e5.chunk.css",
+    "static/js/2.552cb680.chunk.js": "/spacex-launches/static/js/2.552cb680.chunk.js",
+    "static/js/2.552cb680.chunk.js.map": "/spacex-launches/static/js/2.552cb680.chunk.js.map",
+    "static/js/3.f34552c6.chunk.js": "/spacex-launches/static/js/3.f34552c6.chunk.js",
+    "static/js/3.f34552c6.chunk.js.map": "/spacex-launches/static/js/3.f34552c6.chunk.js.map",
     "index.html": "/spacex-launches/index.html",
-    "static/css/main.9d5b29c0.chunk.css.map": "/spacex-launches/static/css/main.9d5b29c0.chunk.css.map",
-    "static/js/2.35c8a77c.chunk.js.LICENSE.txt": "/spacex-launches/static/js/2.35c8a77c.chunk.js.LICENSE.txt",
-    "static/media/logo.6ce24c58.svg": "/spacex-launches/static/media/logo.6ce24c58.svg"
+    "static/css/2.7152c0e5.chunk.css.map": "/spacex-launches/static/css/2.7152c0e5.chunk.css.map",
+    "static/css/main.eb5b320e.chunk.css.map": "/spacex-launches/static/css/main.eb5b320e.chunk.css.map",
+    "static/js/2.552cb680.chunk.js.LICENSE.txt": "/spacex-launches/static/js/2.552cb680.chunk.js.LICENSE.txt",
+    "static/media/Layout.scss": "/spacex-launches/static/media/BrandonGrotesque-RegularItalic.78a0e531.woff2",
+    "static/media/launch-home.b539e3f9.png": "/spacex-launches/static/media/launch-home.b539e3f9.png",
+    "static/media/spacex-logo.e755fcbf.png": "/spacex-launches/static/media/spacex-logo.e755fcbf.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.2ce542f3.js",
-    "static/js/2.35c8a77c.chunk.js",
-    "static/css/main.9d5b29c0.chunk.css",
-    "static/js/main.b7a7c18e.chunk.js"
+    "static/js/runtime-main.8351c649.js",
+    "static/css/2.7152c0e5.chunk.css",
+    "static/js/2.552cb680.chunk.js",
+    "static/css/main.eb5b320e.chunk.css",
+    "static/js/main.c6f016a3.chunk.js"
   ]
 }
